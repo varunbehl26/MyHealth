@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:focusableInTouchMode="true"
+    android:padding="@dimen/size10"
+    tools:context="com.lifeapps.myhealth.ProfileActivity">
+
+
+    <ImageView
+        android:src="@drawable/ic_menu_gallery"
+        android:id="@+id/img_profile"
+        android:layout_width="@dimen/size100"
+        android:layout_height="@dimen/size100"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/name_til"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/name_til"
+        style="@style/profileTextInputLayoutStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
+        android:imeOptions="actionNext"
+        app:layout_constraintBottom_toTopOf="@+id/email_til"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/img_profile">
+
+        <EditText
+            android:id="@+id/name_et"
+            style="@style/profileEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name"
+            android:imeOptions="actionNext"
+            android:inputType="text" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/email_til"
+        style="@style/profileTextInputLayoutStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/password_til"
+        app:layout_constraintEnd_toEndOf="@id/name_til"
+        app:layout_constraintStart_toStartOf="@id/name_til"
+        app:layout_constraintTop_toBottomOf="@+id/name_til">
+
+        <EditText
+            android:id="@+id/email_et"
+            style="@style/profileEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:imeOptions="actionNext" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/password_til"
+        style="@style/profileTextInputLayoutStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/confirm_password_til"
+        app:layout_constraintEnd_toEndOf="@id/name_til"
+        app:layout_constraintStart_toStartOf="@id/name_til"
+        app:layout_constraintTop_toBottomOf="@+id/email_til">
+
+        <EditText
+            android:id="@+id/password_et"
+            style="@style/profileEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:imeOptions="actionNext" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/confirm_password_til"
+        style="@style/profileTextInputLayoutStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/mobile_til"
+        app:layout_constraintEnd_toEndOf="@id/name_til"
+        app:layout_constraintStart_toStartOf="@id/name_til"
+        app:layout_constraintTop_toBottomOf="@+id/password_til">
+
+        <EditText
+            android:id="@+id/confirm_password_et"
+            style="@style/profileEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/confirm_password"
+            android:imeOptions="actionNext" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/mobile_til"
+        style="@style/profileTextInputLayoutStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/dob_til"
+        app:layout_constraintEnd_toEndOf="@id/name_til"
+        app:layout_constraintStart_toStartOf="@+id/name_til"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_password_til">
+
+        <EditText
+            android:id="@+id/mobile_et"
+            style="@style/profileEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Mobile"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="10" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/dob_til"
+        style="@style/profileTextInputLayoutStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/group"
+        app:layout_constraintEnd_toEndOf="@+id/name_til"
+        app:layout_constraintStart_toStartOf="@+id/name_til"
+        app:layout_constraintTop_toBottomOf="@+id/mobile_til">
+
+        <EditText
+            android:id="@+id/dob_et"
+            style="@style/profileEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/date_of_birth"
+            android:imeOptions="actionNext"
+            android:inputType="date" />
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintBottom_toTopOf="@+id/current_loc_til"
+        app:layout_constraintEnd_toEndOf="@+id/name_til"
+        app:layout_constraintStart_toStartOf="@+id/name_til"
+        app:layout_constraintTop_toBottomOf="@+id/dob_til">
+
+        <RadioButton
+            android:id="@+id/maleRb"
+            style="@style/radioBtnStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="@string/male" />
+
+        <RadioButton
+            android:id="@+id/femaleRb"
+            style="@style/radioBtnStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="@string/female" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/current_loc_til"
+        style="@style/profileTextInputLayoutStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/btn_submit"
+        app:layout_constraintEnd_toEndOf="@+id/name_til"
+        app:layout_constraintStart_toStartOf="@+id/name_til"
+        app:layout_constraintTop_toBottomOf="@id/group">
+
+        <EditText
+            android:id="@+id/current_loc_et"
+            style="@style/profileEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/currently_living_at"
+            android:imeOptions="actionNext"
+            android:inputType="text" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:background="@color/colorAccent"
+        android:text="@string/submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/name_til"
+        app:layout_constraintStart_toStartOf="@id/name_til"
+        app:layout_constraintTop_toBottomOf="@+id/current_loc_til" />
+
+    <!--<CheckBox-->
+    <!--android:id="@+id/receive_notification"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="6dp"-->
+    <!--android:text="@string/receive_notification"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="@id/name_til"-->
+    <!--app:layout_constraintStart_toStartOf="@id/name_til"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/current_loc_til" />-->
+</android.support.constraint.ConstraintLayout>
+
+
