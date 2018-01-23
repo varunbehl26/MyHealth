@@ -1,7 +1,7 @@
 package com.lifeapps.myhealth.db
 
-import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.Database
+import android.arch.persistence.room.RoomDatabase
 
 /**
  * Created by varunbehl on 15/10/17.

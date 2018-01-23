@@ -1,9 +1,13 @@
 package com.lifeapps.myhealth.utils
 
-import android.text.TextUtils
-import android.view.View
-import com.lifeapps.myhealth.R
-import kotlinx.android.synthetic.main.activity_login.*
+import android.os.AsyncTask
+import com.google.firebase.crash.FirebaseCrash
+import com.lifeapps.myhealth.LoginActivity
+import com.lifeapps.myhealth.model.User
+import com.lifeapps.myhealth.network.RetrofitManager
+import rx.Subscriber
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
 /**
  * Created by varunbehl on 02/10/17.
@@ -14,61 +18,99 @@ import kotlinx.android.synthetic.main.activity_login.*
  * errors are presented and no actual login attempt is made.
  */
 
-// class  LoginUtil {
-//    private fun attemptLogin() {
-//        if (mAuthTask != null) {
-//            return
-//        }
-//
-//        // Reset errors.
-//        email.error = null
-//        password.error = null
-//
-//        // Store values at the time of the login attempt.
-//        val emailStr = email.text.toString()
-//        val passwordStr = password.text.toString()
-//
-//        var cancel = false
-//        var focusView: View? = null
-//
-//        // Check for a valid password, if the user entered one.
-//        if (!TextUtils.isEmpty(passwordStr) && !isPasswordValid(passwordStr)) {
-//            password.error = getString(R.string.error_invalid_password)
-//            focusView = password
-//            cancel = true
-//        }
-//
-//        // Check for a valid email address.
-//        if (TextUtils.isEmpty(emailStr)) {
-//            email.error = getString(R.string.error_field_required)
-//            focusView = email
-//            cancel = true
-//        } else if (!isEmailValid(emailStr)) {
-//            email.error = getString(R.string.error_invalid_email)
-//            focusView = email
-//            cancel = true
-//        }
-//
-//        if (cancel) {
-//            // There was an error; don't attempt login and focus the first
-//            // form field with an error.
-//            focusView?.requestFocus()
-//        } else {
-//            // Show a progress spinner, and kick off a background task to
-//            // perform the user login attempt.
-//            showProgress(true)
-//            mAuthTask = UserLoginTask(emailStr, passwordStr)
-//            mAuthTask!!.execute(null as Void?)
-//        }
-//    }
-//
-//    private fun isEmailValid(email: String): Boolean {
-//        //TODO: Replace this with your own logic
-//        return email.contains("@")
-//    }
-//
-//    private fun isPasswordValid(password: String): Boolean {
-//        //TODO: Replace this with your own logic
-//        return password.length > 4
-//    }
-//}
+class LoginUtil {
+    companion object {
+
+
+        public fun isEmailValid(email: String): Boolean {
+            //TODO: Replace this with your own logic
+            return email.contains("@")
+        }
+
+        public fun isPasswordValid(password: String): Boolean {
+            //TODO: Replace this with your own logic
+            return password.length > 4
+        }
+
+
+//        /**
+//         * Shows the progress UI and hides the login form.
+//         */
+//        @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+//        fun showProgress(show: Boolean, context: Context) =// On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+//                // for very easy animations. If available, use these APIs to fade-in
+//                // the progress spinner.
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+//                    val shortAnimTime = context.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+//                    login_progress.visibility = if (show) View.VISIBLE else View.GONE
+//                    login_progress.animate()
+//                            .setDuration(shortAnimTime)
+//                            .alpha((if (show) 1 else 0).toFloat())
+//                            .setListener(object : AnimatorListenerAdapter() {
+//                                override fun onAnimationEnd(animation: Animator) {
+//                                    login_progress.visibility = if (show) View.VISIBLE else View.GONE
+//                                }
+//                            })
+//                } else {
+//                    // The ViewPropertyAnimator APIs are not available, so simply show
+//                    // and hide the relevant UI components.
+//                    login_progress.visibility = if (show) View.VISIBLE else View.GONE
+//                    //            login_form.visibility = if (show) View.GONE else View.VISIBLE
+//                }
+    }
+
+    inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) : AsyncTask<Void, Void, Boolean>() {
+
+        private lateinit var userList: List<User>
+
+        override fun doInBackground(vararg params: Void): Boolean? {
+            // TODO: attempt authentication against a network service.
+
+
+            val retrofitManager = RetrofitManager.getInstance()
+
+            val userInfoObservable = retrofitManager.userInfo
+            userInfoObservable
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(object : Subscriber<List<User>>() {
+                        override fun onCompleted() {
+                            LoginActivity.loginTaskCompleted(userList);
+
+                        }
+
+                        override fun onError(e: Throwable) {
+                            e.printStackTrace()
+                            FirebaseCrash.report(e)
+                        }
+
+                        override fun onNext(einfo: List<User>) {
+                            userList = einfo
+                        }
+                    })
+
+
+
+            return true
+
+        }
+
+
+        override fun onPostExecute(success: Boolean?) {
+//            mAuthTask = null
+//            showProgress(false)
+
+            if (success!!) {
+
+            } else {
+//                LoginActivity.loginTaskFailure(userList)
+            }
+        }
+
+        override fun onCancelled() {
+//            showProgress(false)
+        }
+    }
+
+
+}

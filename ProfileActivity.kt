@@ -1,18 +1,13 @@
 package com.lifeapps.myhealth
 
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.crash.FirebaseCrash
 import com.lifeapps.myhealth.model.User
 import com.lifeapps.myhealth.network.RetrofitManager
 import kotlinx.android.synthetic.main.activity_profile.*
-import rx.Subscriber
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 import java.math.BigInteger
 
 

@@ -3,7 +3,6 @@ package com.lifeapps.myhealth.db
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import java.math.BigInteger
 
 
 /**

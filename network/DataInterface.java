@@ -2,7 +2,6 @@ package com.lifeapps.myhealth.network;
 
 import com.lifeapps.myhealth.model.User;
 
-import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;

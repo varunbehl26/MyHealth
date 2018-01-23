@@ -23,27 +23,27 @@ public class RetrofitManager {
     private static RetrofitManager retrofitManager;
 
     private RetrofitManager() {
-         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
-            builder.readTimeout(10, TimeUnit.SECONDS);
-            builder.connectTimeout(5, TimeUnit.SECONDS);
+        OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
+        builder.readTimeout(10, TimeUnit.SECONDS);
+        builder.connectTimeout(5, TimeUnit.SECONDS);
 
 //            if (BuildConfig.DEBUG) {
-            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            builder.addInterceptor(interceptor);
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        builder.addInterceptor(interceptor);
 //            }
 
-            OkHttpClient client = builder.build();
+        OkHttpClient client = builder.build();
 
-            String API_BASE_URL = "http://varunbehl.localhost.run/";
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(API_BASE_URL)
-                    .client(client)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                    .build();
+        String API_BASE_URL = "http://varunbehl.localhost.run/";
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(API_BASE_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
 
-            dataInterface = retrofit.create(DataInterface.class);
+        dataInterface = retrofit.create(DataInterface.class);
 
     }
 
