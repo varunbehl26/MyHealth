@@ -3,6 +3,7 @@ package com.lifeapps.myhealth.db
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import org.jetbrains.annotations.NotNull
 
 
 /**
@@ -10,6 +11,7 @@ import android.arch.persistence.room.PrimaryKey
  */
 @Entity
 class UserDbModel {
+    @NotNull
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0
 

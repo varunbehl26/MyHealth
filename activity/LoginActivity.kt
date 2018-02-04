@@ -1,4 +1,4 @@
-package com.lifeapps.myhealth
+package com.lifeapps.myhealth.activity
 
 import android.app.Activity
 import android.arch.persistence.room.Room
@@ -23,6 +23,7 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.lifeapps.myhealth.R
 import com.lifeapps.myhealth.db.AppDatabase
 import com.lifeapps.myhealth.db.UserDbModel
 import com.lifeapps.myhealth.model.User
@@ -36,7 +37,7 @@ class LoginActivity : BaseActivity(), GoogleApiClient.OnConnectionFailedListener
 
     lateinit var userList: List<User>
     private lateinit var userInfo: Any
-    var mAuthTask: LoginUtil.UserLoginTask? = null
+    //    var mAuthTask: LoginUtil.UserLoginTask? = null
     private var mAuth: FirebaseAuth? = null
     private var mGoogleApiClient: GoogleApiClient? = null
     private val TAG = "MainActivity"
@@ -130,9 +131,9 @@ class LoginActivity : BaseActivity(), GoogleApiClient.OnConnectionFailedListener
      * errors are presented and no actual login attempt is made.
      */
     private fun attemptLogin() {
-        if (mAuthTask != null) {
-            return
-        }
+//        if (mAuthTask != null) {
+//            return
+//        }
 
         // Reset errors.
         email.error = null

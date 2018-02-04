@@ -1,4 +1,4 @@
-package com.lifeapps.myhealth
+package com.lifeapps.myhealth.activity
 
 import android.support.v7.app.AppCompatActivity
 

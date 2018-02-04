@@ -1,14 +1,5 @@
 package com.lifeapps.myhealth.utils
 
-import android.os.AsyncTask
-import com.google.firebase.crash.FirebaseCrash
-import com.lifeapps.myhealth.LoginActivity
-import com.lifeapps.myhealth.model.User
-import com.lifeapps.myhealth.network.RetrofitManager
-import rx.Subscriber
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
-
 /**
  * Created by varunbehl on 02/10/17.
  */
@@ -59,58 +50,58 @@ class LoginUtil {
 //                }
     }
 
-    inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) : AsyncTask<Void, Void, Boolean>() {
-
-        private lateinit var userList: List<User>
-
-        override fun doInBackground(vararg params: Void): Boolean? {
-            // TODO: attempt authentication against a network service.
-
-
-            val retrofitManager = RetrofitManager.getInstance()
-
-            val userInfoObservable = retrofitManager.userInfo
-            userInfoObservable
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(object : Subscriber<List<User>>() {
-                        override fun onCompleted() {
-                            LoginActivity.loginTaskCompleted(userList);
-
-                        }
-
-                        override fun onError(e: Throwable) {
-                            e.printStackTrace()
-                            FirebaseCrash.report(e)
-                        }
-
-                        override fun onNext(einfo: List<User>) {
-                            userList = einfo
-                        }
-                    })
-
-
-
-            return true
-
-        }
-
-
-        override fun onPostExecute(success: Boolean?) {
-//            mAuthTask = null
-//            showProgress(false)
-
-            if (success!!) {
-
-            } else {
-//                LoginActivity.loginTaskFailure(userList)
-            }
-        }
-
-        override fun onCancelled() {
-//            showProgress(false)
-        }
-    }
+//    inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) : AsyncTask<Void, Void, Boolean>() {
+//
+//        private lateinit var userList: List<User>
+//
+//        override fun doInBackground(vararg params: Void): Boolean? {
+//            // TODO: attempt authentication against a network service.
+//
+//
+//            val retrofitManager = RetrofitManager.getInstance(LoginUtil.)
+//
+//            val userInfoObservable = retrofitManager.userInfo
+//            userInfoObservable
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribeOn(Schedulers.io())
+//                    .subscribe(object : Subscriber<List<User>>() {
+//                        override fun onCompleted() {
+//                            LoginActivity.loginTaskCompleted(userList);
+//
+//                        }
+//
+//                        override fun onError(e: Throwable) {
+//                            e.printStackTrace()
+//                            FirebaseCrash.report(e)
+//                        }
+//
+//                        override fun onNext(einfo: List<User>) {
+//                            userList = einfo
+//                        }
+//                    })
+//
+//
+//
+//            return true
+//
+//        }
+//
+//
+//        override fun onPostExecute(success: Boolean?) {
+////            mAuthTask = null
+////            showProgress(false)
+//
+//            if (success!!) {
+//
+//            } else {
+////                LoginActivity.loginTaskFailure(userList)
+//            }
+//        }
+//
+//        override fun onCancelled() {
+////            showProgress(false)
+//        }
+//    }
 
 
 }

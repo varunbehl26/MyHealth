@@ -1,8 +1,11 @@
 package com.lifeapps.myhealth.network;
 
-import com.lifeapps.myhealth.model.User;
+import android.content.Context;
 
-import java.util.List;
+import com.lifeapps.myhealth.model.MasterReponse;
+import com.lifeapps.myhealth.model.User;
+import com.readystatesoftware.chuck.ChuckInterceptor;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -22,10 +25,12 @@ public class RetrofitManager {
     private static DataInterface dataInterface = null;
     private static RetrofitManager retrofitManager;
 
-    private RetrofitManager() {
+    private RetrofitManager(Context context) {
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
         builder.readTimeout(10, TimeUnit.SECONDS);
         builder.connectTimeout(5, TimeUnit.SECONDS);
+        builder.addInterceptor(new ChuckInterceptor(context));
+
 
 //            if (BuildConfig.DEBUG) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -35,7 +40,7 @@ public class RetrofitManager {
 
         OkHttpClient client = builder.build();
 
-        String API_BASE_URL = "http://varunbehl.localhost.run/";
+        String API_BASE_URL = "http://13.89.238.127:8080/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API_BASE_URL)
                 .client(client)
@@ -47,15 +52,15 @@ public class RetrofitManager {
 
     }
 
-    public static RetrofitManager getInstance() {
+    public static RetrofitManager getInstance(Context context) {
         if (retrofitManager == null) {
-            retrofitManager = new RetrofitManager();
+            retrofitManager = new RetrofitManager(context);
         }
         return retrofitManager;
     }
 
 
-    public Observable<List<User>> getUserInfo() {
+    public Observable<MasterReponse> getUserInfo() {
         return dataInterface.getUsers();
     }
 

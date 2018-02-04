@@ -1,6 +1,7 @@
-package com.lifeapps.myhealth
+package com.lifeapps.myhealth.activity
 
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -8,9 +9,11 @@ import android.view.Menu
 import android.view.MenuItem
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
+import com.lifeapps.myhealth.R
+import com.lifeapps.myhealth.fragments.UserListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -37,10 +40,27 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
 
     }
 
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_home -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.framelayout, UserListFragment.newInstance(0)).commit()
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_dashboard -> {
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_notifications -> {
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
