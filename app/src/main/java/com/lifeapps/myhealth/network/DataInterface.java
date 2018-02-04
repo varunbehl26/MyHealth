@@ -1,9 +1,7 @@
 package com.lifeapps.myhealth.network;
 
+import com.lifeapps.myhealth.model.MasterReponse;
 import com.lifeapps.myhealth.model.User;
-
-import java.util.HashMap;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -22,9 +20,10 @@ interface DataInterface {
     @POST("user/")
     public Observable saveUser(@Body User text);
 
-    @POST("SpringRest/User/")
+    @POST("springrest/User/")
     Call<User> createUser(@Body User user);
 
-    @GET("SpringRest/User/")
-    Observable<List<User>> getUsers();
+    @GET("springrest/User/")
+    Observable<MasterReponse> getUsers();
+
 }

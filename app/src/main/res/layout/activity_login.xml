@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:padding="@dimen/size10"
-    tools:context="com.lifeapps.myhealth.LoginActivity">
+    tools:context="com.lifeapps.myhealth.activity.LoginActivity">
 
     <!-- Login progress -->
     <ProgressBar

@@ -1,18 +1,16 @@
-package com.lifeapps.myhealth
+package com.lifeapps.myhealth.activity
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.crash.FirebaseCrash
+import com.lifeapps.myhealth.R
 import com.lifeapps.myhealth.model.User
+import com.lifeapps.myhealth.model.UserProfileViewModel
 import com.lifeapps.myhealth.network.RetrofitManager
 import kotlinx.android.synthetic.main.activity_profile.*
-import rx.Subscriber
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 import java.math.BigInteger
 
 
@@ -21,15 +19,21 @@ class ProfileActivity : BaseActivity() {
     private var mAuth: FirebaseAuth? = null
     private val TAG = "ProfileActivity"
 
+    private val UID_KEY = "uid"
+    private var viewModel: UserProfileViewModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+
+        viewModel = ViewModelProviders.of(this).get(UserProfileViewModel::class.java)
+        viewModel!!.init("uid")
 
         mAuth = FirebaseAuth.getInstance()
 
 
         btn_submit.setOnClickListener {
-//            createAccount(email_et.text.toString(), password_et.text.toString())
+            //            createAccount(email_et.text.toString(), password_et.text.toString())
 
             val newUser = User()
             newUser.userName = name_et.text.toString()
@@ -37,7 +41,7 @@ class ProfileActivity : BaseActivity() {
             newUser.userPassword = password_et.text.toString()
             newUser.userMobile = BigInteger(mobile_et.text.toString())
 
-            DataCall(1,newUser).start()
+            DataCall(1, newUser).start()
 
 
         }
@@ -95,18 +99,18 @@ class ProfileActivity : BaseActivity() {
         updateUI(currentUser)
     }
 
-    private inner class DataCall internal constructor(internal val requestType: Int,val newUser:User) : Thread() {
+    private inner class DataCall internal constructor(internal val requestType: Int, val newUser: User) : Thread() {
 
 
         override fun run() {
             super.run()
-            var threadAlreadyRunning=false
+            var threadAlreadyRunning = false
 
             try {
                 if (threadAlreadyRunning) {
                 } else {
                     threadAlreadyRunning = true
-                    val userObserver = RetrofitManager.getInstance().createUser(newUser)
+                    val userObserver = RetrofitManager.getInstance(this@ProfileActivity).createUser(newUser)
                     userObserver.execute()
 
                 }
