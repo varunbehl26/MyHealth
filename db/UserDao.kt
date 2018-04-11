@@ -1,9 +1,11 @@
 package com.lifeapps.myhealth.db
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
+import com.lifeapps.myhealth.model.User
 
 
 /**
@@ -11,16 +13,16 @@ import android.arch.persistence.room.Query
  */
 @Dao
 interface UserDao {
-    @get:Query("SELECT * FROM UserDbModel")
-    val all: List<UserDbModel>
+    @get:Query("SELECT * FROM User")
+    val all: LiveData<List<User>>
 
-    @Query("SELECT * FROM UserDbModel WHERE uid IN (:userIds)")
-    fun loadAllByIds(userIds: IntArray): List<UserDbModel>
+    @Query("SELECT * FROM User WHERE uid IN (:userIds)")
+    fun loadAllByIds(userIds: IntArray): List<User>
 
 
     @Insert
-    fun insertAll(vararg users: UserDbModel)
+    fun insertAll(users: List<User>): List<Long>
 
     @Delete
-    fun delete(user: UserDbModel)
+    fun delete(user: User)
 }

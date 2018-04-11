@@ -1,7 +1,6 @@
 package com.lifeapps.myhealth.activity
 
 import android.app.Activity
-import android.arch.persistence.room.Room
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -24,8 +23,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.lifeapps.myhealth.R
-import com.lifeapps.myhealth.db.AppDatabase
-import com.lifeapps.myhealth.db.UserDbModel
 import com.lifeapps.myhealth.model.User
 import com.lifeapps.myhealth.utils.LoginUtil
 import kotlinx.android.synthetic.main.activity_login.*
@@ -278,16 +275,13 @@ class LoginActivity : BaseActivity(), GoogleApiClient.OnConnectionFailedListener
                 Log.v("firebaseUser", firebaseUser.photoUrl.toString())
                 Log.v("firebaseUser", firebaseUser.isEmailVerified.toString())
 
-                val user = UserDbModel()
+                val user = User()
                 user.userName = firebaseUser.displayName
                 user.userEmail = firebaseUser.email
                 user.userImage = firebaseUser.photoUrl.toString()
 
 //                val userObserver = RetrofitManager.getInstance().createUser(user)
 //                userObserver.execute()
-
-                val database = Room.databaseBuilder(this, AppDatabase::class.java, "room_myhealth.db").allowMainThreadQueries().build()
-                database.userDao().insertAll(user)
 
                 val intent = Intent(this, MainActivity::class.java)
 

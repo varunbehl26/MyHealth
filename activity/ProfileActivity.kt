@@ -9,7 +9,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.lifeapps.myhealth.R
 import com.lifeapps.myhealth.model.User
 import com.lifeapps.myhealth.model.UserProfileViewModel
-import com.lifeapps.myhealth.network.RetrofitManager
 import kotlinx.android.synthetic.main.activity_profile.*
 import java.math.BigInteger
 
@@ -39,7 +38,7 @@ class ProfileActivity : BaseActivity() {
             newUser.userName = name_et.text.toString()
             newUser.userEmail = email_et.text.toString()
             newUser.userPassword = password_et.text.toString()
-            newUser.userMobile = BigInteger(mobile_et.text.toString())
+            newUser.userMobile = BigInteger(mobile_et.text.toString()).toString()
 
             DataCall(1, newUser).start()
 
@@ -106,17 +105,17 @@ class ProfileActivity : BaseActivity() {
             super.run()
             var threadAlreadyRunning = false
 
-            try {
-                if (threadAlreadyRunning) {
-                } else {
-                    threadAlreadyRunning = true
-                    val userObserver = RetrofitManager.getInstance(this@ProfileActivity).createUser(newUser)
-                    userObserver.execute()
-
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+//            try {
+//                if (threadAlreadyRunning) {
+//                } else {
+//                    threadAlreadyRunning = true
+//                    val userObserver = RetrofitManager.getInstance(this@ProfileActivity).createUser(newUser)
+//                    userObserver.execute()
+//
+//                }
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//            }
 
         }
     }

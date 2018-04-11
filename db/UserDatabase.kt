@@ -2,11 +2,11 @@ package com.lifeapps.myhealth.db
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
+import com.lifeapps.myhealth.model.User
 
-/**
- * Created by varunbehl on 15/10/17.
- */
-@Database(entities = arrayOf(UserDbModel::class), version = 1)
-abstract class AppDatabase : RoomDatabase() {
+
+@Database(entities = [(User::class)], version = 1)
+abstract class UserDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+
 }

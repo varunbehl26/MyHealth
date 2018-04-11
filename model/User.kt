@@ -1,30 +1,79 @@
 package com.lifeapps.myhealth.model
 
-import java.math.BigInteger
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+import org.jetbrains.annotations.NotNull
 
 /**
  * Created by varunbehl on 01/10/17.
  */
-class User {
+@Entity
+data class User(
+        @NotNull
+        @PrimaryKey(autoGenerate = true)
+        var uid: Int = 0,
 
-    var userId: String? = null
-    var userPassword: String? = null
-    var userName: String? = null
-    var userEmail: String? = null
-    var userMobile: BigInteger? = null
-    var userPhone: BigInteger? = null
-    var gymId: String? = null
-    var dietId: String? = null
-    var userLevel: Int? = null
-    var userImage: String? = null
-    var userSex: String? = null
-    var userDob: String? = null
-    var gymSlot: String? = null
-    var userWeight: String? = null
-    var userHeight: String? = null
-    var userBmi: String? = null
-    var userStatus: Boolean? = null
-    var userAttendence: String? = null
-    var userType: String? = null
-    var userSubscription: Boolean? = null
-}
+        @ColumnInfo(name = "userName")
+        var userName: String? = null,
+
+        @ColumnInfo(name = "userId")
+        var userId: String? = null,
+
+        @ColumnInfo(name = "userPassword")
+        var userPassword: String? = null,
+
+        @ColumnInfo(name = "userEmail")
+        var userEmail: String? = null,
+
+        @ColumnInfo(name = "userMobile")
+        var userMobile: String? = null,
+
+
+        @ColumnInfo(name = "userPhone")
+        var userPhone: String? = null,
+
+        @ColumnInfo(name = "gymId")
+        var gymId: String? = null,
+
+        @ColumnInfo(name = "dietId")
+        var dietId: String? = null,
+
+        @ColumnInfo(name = "userLevel")
+        var userLevel: Int? = null,
+
+        @ColumnInfo(name = "userImage")
+        var userImage: String? = null,
+
+        @ColumnInfo(name = "userSex")
+        var userSex: String? = null,
+
+        @ColumnInfo(name = "userDob")
+        var userDob: String? = null,
+
+        @ColumnInfo(name = "gymSlot")
+        var gymSlot: String? = null,
+
+        @ColumnInfo(name = "userWeight")
+        var userWeight: String? = null,
+
+        @ColumnInfo(name = "userHeight")
+        var userHeight: String? = null,
+
+        @ColumnInfo(name = "userBmi")
+        var userBmi: String? = null,
+
+        @ColumnInfo(name = "userStatus")
+        var userStatus: Boolean? = null,
+
+        @ColumnInfo(name = "userAttendence")
+        var userAttendence: String? = null,
+
+        @ColumnInfo(name = "userType")
+        var userType: String? = null,
+
+        @ColumnInfo(name = "userSubscription")
+        var userSubscription: Boolean? = null
+
+)
+
